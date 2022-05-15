@@ -24,6 +24,23 @@ namespace Api.Controllers
             return Ok();
         }
 
+        [HttpDelete]
+        [Route("Delete")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _service.DeleteAsync(id);
+            return Ok();
+        }
+        [HttpPut]
+        [Route("Update/{id}")]
+        public async Task<IActionResult> Update([FromRoute] int id, [FromBody] SliderEditDto slider)
+        {
+
+
+            await _service.UpdateAsync(id, slider);
+            return Ok();
+        }
+
         [HttpGet]
         [Route("GetAll")]
         public async Task<IActionResult> GetAll()

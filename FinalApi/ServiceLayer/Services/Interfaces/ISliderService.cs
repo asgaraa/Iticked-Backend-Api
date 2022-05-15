@@ -11,5 +11,7 @@ namespace ServiceLayer.Services.Interfaces
     {
         Task CreateAsync(SliderDto sliderDto);
         Task<List<SliderDto>> GetAllAsync();
+        Task UpdateAsync(int id, SliderEditDto slider);
+        Task DeleteAsync(int id);
     }
 }
