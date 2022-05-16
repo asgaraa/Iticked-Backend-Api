@@ -16,6 +16,7 @@ namespace RepositoryLayer
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<ISliderRepository, SliderRepository>();
             services.AddScoped<IHallRepository, HallRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
 
             return services;
         }

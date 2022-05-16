@@ -16,6 +16,7 @@ namespace ServiceLayer
 
             services.AddScoped<ISliderService, SliderService>();
             services.AddScoped<IHallService, HallService>();
+            services.AddScoped<ICategoryService, CategoryService>();
 
             return services;
         }
