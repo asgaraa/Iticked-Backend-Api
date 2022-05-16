@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DomainLayer.Entities;
+using ServiceLayer.DTOs.Hall;
 using ServiceLayer.DTOs.Slider;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,9 @@ namespace ServiceLayer.Mapping
         public MappingProfile()
         {
             CreateMap<Slider, SliderDto>().ReverseMap();
+            CreateMap<Slider, SliderEditDto>().ReverseMap();
+            CreateMap<Hall, HallDto>().ReverseMap();
+            CreateMap<Hall, HallEditDto>().ReverseMap();
         }
     }
 }

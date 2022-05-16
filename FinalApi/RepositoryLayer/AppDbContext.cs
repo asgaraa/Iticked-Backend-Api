@@ -17,6 +17,7 @@ namespace RepositoryLayer
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SliderConfiguration());
+            modelBuilder.ApplyConfiguration(new HallConfiguration());
             base.OnModelCreating(modelBuilder);
         }
 
