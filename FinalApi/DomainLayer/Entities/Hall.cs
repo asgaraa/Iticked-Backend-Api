@@ -12,5 +12,6 @@ namespace DomainLayer.Entities
         public string Name { get; set; }
         public string Address { get; set; }
         public int Place { get; set; }
+        public List<Event> Events { get; set; }
     }
 }

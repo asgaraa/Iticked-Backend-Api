@@ -19,6 +19,8 @@ namespace RepositoryLayer
             modelBuilder.ApplyConfiguration(new SliderConfiguration());
             modelBuilder.ApplyConfiguration(new HallConfiguration());
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new EventConfiguration());
+            modelBuilder.ApplyConfiguration(new SeansConfiguration());
             base.OnModelCreating(modelBuilder);
         }
 
