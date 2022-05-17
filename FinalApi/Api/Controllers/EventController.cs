@@ -48,5 +48,13 @@ namespace Api.Controllers
             return Ok(result);
         }
 
+        [HttpGet]
+        [Route("GetById")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var result = await _service.GetByIdAsync(id);
+            return Ok(result);
+        }
+
     }
 }

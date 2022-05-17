@@ -14,5 +14,6 @@ namespace ServiceLayer.Services.Interfaces
         Task UpdateAsync(int id, EventEditDto levent);
         Task DeleteAsync(int id);
         Task<List<EventDto>> GetAllAsync();
+        Task<EventDto> GetByIdAsync(int id);
     }
 }

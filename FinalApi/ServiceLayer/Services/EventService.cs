@@ -39,9 +39,16 @@ namespace ServiceLayer.Services
             return res;
         }
 
+        public async Task<EventDto> GetByIdAsync(int id)
+        {
+            var model = await _repository.GetEventAsync(id);
+            var res =  _mapper.Map<EventDto>(model);
+            return res;
+        }
+
         public async Task UpdateAsync(int id, EventEditDto levent)
         {
-            var entity = await _repository.GetAsync(id);
+            var entity = await _repository.GetEventAsync(id);
 
             _mapper.Map(levent, entity);
 
