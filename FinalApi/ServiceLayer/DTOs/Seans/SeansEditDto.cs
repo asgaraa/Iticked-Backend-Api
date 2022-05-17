@@ -8,9 +8,8 @@ namespace ServiceLayer.DTOs.Seans
 {
     public class SeansEditDto
     {
-        public DateTime Morning { get; set; }
-        public DateTime Afternoon { get; set; }
-        public DateTime Night { get; set; }
+        public string Name { get; set; }
+        public DateTime Hour { get; set; }
 
     }
 }

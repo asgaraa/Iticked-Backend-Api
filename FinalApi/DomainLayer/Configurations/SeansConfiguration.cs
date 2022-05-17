@@ -13,9 +13,9 @@ namespace DomainLayer.Configurations
     {
         public void Configure(EntityTypeBuilder<Seans> builder)
         {
-            builder.Property(m => m.Morning).IsRequired();
-            builder.Property(m => m.Afternoon).IsRequired();
-            builder.Property(m => m.Night).IsRequired();
+            builder.Property(m => m.Name).IsRequired();
+            builder.Property(m => m.Hour).IsRequired();
+        
 
         }
     }

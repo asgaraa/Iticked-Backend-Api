@@ -9,10 +9,8 @@ namespace DomainLayer.Entities
 {
     public class Seans : BaseEntity
     {
-        public DateTime Morning { get; set; }
-        public DateTime Afternoon { get; set; }
-        public DateTime Night { get; set; }
-
-
+        public string Name { get; set; }
+        public DateTime Hour { get; set; }
+      
     }
 }
