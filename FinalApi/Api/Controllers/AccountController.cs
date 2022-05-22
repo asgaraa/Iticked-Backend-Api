@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using static Api.Helper.Helper;
 
 namespace Api.Controllers
 {
@@ -46,13 +45,7 @@ namespace Api.Controllers
         [Route("CreateRole")]
         public async Task<IActionResult> CreateRole([FromBody] RoleDto roleDto)
         {
-            foreach (var role in Enum.GetValues(typeof(Roles)))
-            {
-                if (!await _roleManager.RoleExistsAsync(role.ToString()))
-                {
-                    await _roleManager.CreateAsync(new IdentityRole { Name = role.ToString() });
-                }
-            }
+            await _roleManager.CreateAsync(new IdentityRole { Name = roleDto.Role });
             return Ok();
         }
 
