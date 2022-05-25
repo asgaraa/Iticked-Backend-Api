@@ -3,10 +3,9 @@ using System.Threading.Tasks;
 
 namespace ServiceLayer.Services.Interfaces
 {
-    public interface IAccountService
+    public interface IEmailService
     {
-        Task Regsiter(RegisterDto registerDto);
-        Task<string> Login(LoginDto loginDto);
+        Task Register(RegisterDto registerDto);
         Task ConfirmEmail(string userId, string token);
     }
 }
