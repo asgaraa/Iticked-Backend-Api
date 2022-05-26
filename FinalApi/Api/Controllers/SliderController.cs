@@ -22,8 +22,8 @@ namespace Api.Controllers
         }
 
         [HttpDelete]
-        [Route("Delete")]
-        public async Task<IActionResult> Delete(int id)
+        [Route("Delete/{id}")]
+        public async Task<IActionResult> Delete([FromRoute]int id)
         {
             await _service.DeleteAsync(id);
 
