@@ -28,20 +28,25 @@ namespace Api.Controllers
         }
 
         [HttpPut]
-        [Route("UpdateCategory/{id}")]
-        public async Task<IActionResult> Update([FromRoute] int id, [FromBody] CategoryEditDto category)
+        [Route("Update")]
+        public async Task<IActionResult> Update([FromBody] CategoryEditDto category)
         {
-
-
-            await _service.UpdateAsync(id, category);
+            await _service.UpdateAsync(category);
             return Ok();
-
         }
         [HttpGet]
         [Route("GetAllCategories")]
         public async Task<IActionResult> GetAll()
         {
             var result = await _service.GetAllAsync();
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [Route("GetById/{id}")]
+        public async Task<IActionResult> GetById([FromRoute]int id)
+        {
+            var result = await _service.GetAsync(id);
             return Ok(result);
         }
     }
