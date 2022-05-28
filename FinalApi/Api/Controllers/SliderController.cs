@@ -40,6 +40,14 @@ namespace Api.Controllers
         }
 
         [HttpGet]
+        [Route("GetById/{id}")]
+        public async Task<IActionResult> GetById([FromRoute] int id)
+        {
+            var result = await _service.GetAsync(id);
+            return Ok(result);
+        }
+
+        [HttpGet]
         [Route("GetAll")]
         public async Task<IActionResult> GetAll()
         {
