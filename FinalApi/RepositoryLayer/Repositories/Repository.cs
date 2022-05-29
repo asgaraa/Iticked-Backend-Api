@@ -31,7 +31,7 @@ namespace RepositoryLayer.Repositories
         {
             if (entity is null) throw new ArgumentNullException();
 
-            entity.SoftDelete=true;
+            entity.SoftDelete = true;
             await _context.SaveChangesAsync();
         }
 
@@ -49,13 +49,13 @@ namespace RepositoryLayer.Repositories
 
         public async Task<List<T>> GetAllAsync()
         {
-            return await entities.Where(m=> m.SoftDelete==false).ToListAsync();
+            return await entities.ToListAsync();
         }
 
         public async Task<T> GetAsync(int id)
         {
 
-            T entity = await entities.Where(m=>m.SoftDelete==false).FirstOrDefaultAsync(m => m.Id == id);
+            T entity = await entities.FirstOrDefaultAsync(m => m.Id == id);
 
             if (entity is null) throw new NullReferenceException();
 

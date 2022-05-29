@@ -20,7 +20,7 @@ namespace ServiceLayer.Services
         private readonly IHttpContextAccessor _accessor;
         private readonly LinkGenerator _generator;
 
-        public EmailService(UserManager<AppUser> userManager,IWebHostEnvironment env,LinkGenerator generator,IHttpContextAccessor accessor)
+        public EmailService(UserManager<AppUser> userManager, IWebHostEnvironment env, LinkGenerator generator, IHttpContextAccessor accessor)
         {
             _userManager = userManager;
             _generator = generator;
@@ -30,16 +30,16 @@ namespace ServiceLayer.Services
         }
 
 
-        public async Task Register(RegisterDto registerDto)
+        public async Task Register(RegisterDto registerDto, string link)
         {
 
             AppUser appUser = await _userManager.FindByEmailAsync(registerDto.Email);
-            var link = GenerateConfirmEmailLink(appUser);
+
             var message = new MimeMessage();
             message.From.Add(new MailboxAddress("ITicket", "code.test.iticket@gmail.com"));
-            message.To.Add(new MailboxAddress(appUser.Name, appUser.Email));
+            message.To.Add(new MailboxAddress(appUser.FullName, appUser.Email));
             message.Subject = "Confirm Email";
-            string emailbody = link.Result;
+            string emailbody = link;
             message.Body = new TextPart() { Text = emailbody };
 
             using var smtp = new SmtpClient();
@@ -50,21 +50,11 @@ namespace ServiceLayer.Services
         }
 
 
-        private async Task<string> GenerateConfirmEmailLink(AppUser appUser)
-        {
-            
-            var code = await _userManager.GenerateEmailConfirmationTokenAsync(appUser);
-            var callbackLink = _generator.GetUriByPage(_accessor.HttpContext,
-                page: "/Account/ConfirmEmail",
-                handler: code,
-                values: new { area = "Identity", userId = appUser.Id, code = code });
 
-            return callbackLink;
-        }
-        
+
         public async Task ConfirmEmail(string userId, string token)
         {
-            
+
             AppUser user = await _userManager.FindByIdAsync(userId);
 
             await _userManager.ConfirmEmailAsync(user, token);
