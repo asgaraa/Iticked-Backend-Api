@@ -49,7 +49,7 @@ namespace RepositoryLayer.Repositories
 
         public async Task<List<T>> GetAllAsync()
         {
-            return await entities.Where(m=> m.SoftDelete==false).ToListAsync();
+            return await entities.ToListAsync();
         }
 
         public async Task<T> GetAsync(int id)
