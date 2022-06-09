@@ -45,11 +45,13 @@ namespace ServiceLayer.Services
             var user = _mapper.Map<AppUser>(registerDto);
             await _userManager.CreateAsync(user, registerDto.Password);
             await _userManager.AddToRoleAsync(user, "SuperAdmin");
+         
         }
 
         public async Task ConfirmEmail(string userId, string token)
         {
             await _emailService.ConfirmEmail(userId, token);
+
         }
     }
 }

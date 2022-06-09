@@ -60,5 +60,13 @@ namespace Api.Controllers
             var result = await _service.GetByCateId(id);
             return Ok(result);
         }
+        [HttpGet]
+        [Route("GetAllByName")]
+        public async Task<IActionResult> GetAllByName([FromQuery] string search)
+        {
+            
+                return Ok(await _service.GetAllNameAsync(search));
+            
+        }
     }
 }
