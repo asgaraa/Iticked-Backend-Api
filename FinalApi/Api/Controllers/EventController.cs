@@ -61,12 +61,10 @@ namespace Api.Controllers
             return Ok(result);
         }
         [HttpGet]
-        [Route("GetAllByName")]
-        public async Task<IActionResult> GetAllByName([FromQuery] string search)
+        [Route("GetAllByName/{txt}")]
+        public async Task<IActionResult> GetAllByName([FromRoute] string txt)
         {
-            
-                return Ok(await _service.GetAllNameAsync(search));
-            
+            return Ok(await _service.GetAllNameAsync(txt));
         }
     }
 }
