@@ -1,4 +1,5 @@
 ﻿using ServiceLayer.DTOs.AppUser;
+using ServiceLayer.DTOs.Order;
 using System.Threading.Tasks;
 
 namespace ServiceLayer.Services.Interfaces
@@ -7,5 +8,6 @@ namespace ServiceLayer.Services.Interfaces
     {
         void Register(RegisterDto registerDto, string link);
         Task ConfirmEmail(string userId, string token);
+        void OrderCreate(string email);
     }
 }

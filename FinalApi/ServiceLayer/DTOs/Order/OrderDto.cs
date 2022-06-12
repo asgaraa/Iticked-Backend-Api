@@ -10,5 +10,6 @@ namespace ServiceLayer.DTOs.Order
     {
         public string SeatId { get; set; }
         public int EventId { get; set; }
+        public string Email { get; set; }
     }
 }
