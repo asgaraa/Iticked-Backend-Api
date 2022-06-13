@@ -10,6 +10,7 @@ using MimeKit.Text;
 using ServiceLayer.DTOs.AppUser;
 using ServiceLayer.DTOs.Order;
 using ServiceLayer.Services.Interfaces;
+using System;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -92,6 +93,38 @@ namespace ServiceLayer.Services
             smtp.Send(message);
             smtp.Disconnect(true);
 
+        }
+
+        public async void ForgotPassword(AppUser user,string url,ForgotPasswordDto forgotPassword)
+        {
+           
+            var message = new MimeMessage();
+
+            message.From.Add(new MailboxAddress("EduHome", "code.test.iticket@gmail.com"));
+
+            message.To.Add(new MailboxAddress(user.FullName,forgotPassword.Email));
+            message.Subject = "Reset Password";
+
+            string emailbody = string.Empty;
+
+            using (StreamReader streamReader = new StreamReader(Path.Combine(_env.WebRootPath, "Templates", "Reset.html")))
+            {
+                emailbody = streamReader.ReadToEnd();
+            }
+
+           
+
+            emailbody = emailbody.Replace("{{fullname}}", $"{user.FullName}").Replace("{{code}}", $"{url}");
+
+            message.Body = new TextPart(TextFormat.Html) { Text = emailbody };
+
+            using var smtp = new SmtpClient();
+
+            smtp.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
+            smtp.Authenticate("code.test.iticket@gmail.com", "psutapkrmjbciuct");
+            smtp.Send(message);
+            smtp.Disconnect(true);
+          
         }
     }
 }

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ServiceLayer.DTOs.AppUser;
 using ServiceLayer.Services.Interfaces;
+using System;
 using System.Threading.Tasks;
 
 
@@ -52,6 +53,40 @@ namespace Api.Controllers
         public async Task<string> Login([FromBody] LoginDto loginDto)
         {
             return await _service.Login(loginDto);
+        }
+
+        [HttpPost]
+        [Route("ForgotPassword")]
+        public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordDto forgotPassword)
+        {
+            var user = await _userManager.FindByEmailAsync(forgotPassword.Email);
+
+            if (user is null) throw new ArgumentNullException();
+
+            string forgotpasswordtoken = await _userManager.GeneratePasswordResetTokenAsync(user);
+            string url = Url.Action(nameof(ResetPassword), "Account", new { email = user.Email, Id = user.Id, token = forgotpasswordtoken, }, Request.Scheme);
+            _emailService.ForgotPassword(user,url,forgotPassword);
+
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("ResetPassword")]
+        public async Task<IActionResult> ResetPassword(ResetPasswordDto resetPassworddto)
+        {
+         
+
+            var user = await _userManager.FindByEmailAsync(resetPassworddto.Email);
+
+            if (user is null) return NotFound();
+
+            IdentityResult result = await _userManager.ResetPasswordAsync(user, resetPassworddto.Token, resetPassworddto.Password);
+
+
+
+
+            return Ok();
+
         }
     }
 }
