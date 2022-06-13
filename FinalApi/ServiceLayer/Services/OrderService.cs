@@ -26,6 +26,11 @@ namespace ServiceLayer.Services
             await _repository.CreateAsync(model);
         }
 
+        public async Task Delete(OrderDto orderDto)
+        {
+            var model = _mapper.Map<Order>(orderDto);
+            await _repository.DeleteAsync(model);
+        }
         public async Task<List<OrderDto>> GetAllAsync(int id)
         {
             var res = await _repository.FindAllAsync(m => m.EventId == id);
