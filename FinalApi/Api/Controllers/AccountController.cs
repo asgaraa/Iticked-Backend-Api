@@ -88,5 +88,14 @@ namespace Api.Controllers
             return Ok();
 
         }
+
+        [HttpGet]
+        [Route("GetUserByEmail/{email}")]
+        public async Task<UserDto> GetUserByEmail([FromRoute] string email)
+        {
+            var user = await _service.GetUserByEmailAsync(email);
+
+            return user;
+        }
     }
 }
