@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ServiceLayer.DTOs.Seans;
 using ServiceLayer.Services.Interfaces;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ namespace Api.Controllers
 
         [HttpPost]
         [Route("CreateSeans")]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Create([FromBody] SeansDto seansDto)
         {
             await _service.CreateAsync(seansDto);
@@ -22,6 +24,7 @@ namespace Api.Controllers
         }
         [HttpDelete]
         [Route("DeleteSeans/{id}")]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Delete([FromRoute]int id)
         {
             await _service.DeleteAsync(id);
@@ -29,6 +32,7 @@ namespace Api.Controllers
         }
         [HttpPut]
         [Route("UpdateSeans/{id}")]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] SeansEditDto seans)
         {
 

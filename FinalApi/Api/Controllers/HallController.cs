@@ -16,6 +16,7 @@ namespace Api.Controllers
 
         [HttpPost]
         [Route("CreateHall")]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Create([FromBody] HallDto hallDto)
         {
             await _service.CreateAsync(hallDto);
@@ -23,6 +24,7 @@ namespace Api.Controllers
         }
         [HttpDelete]
         [Route("DeleteHall/{id}")]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Delete([FromRoute]int id)
         {
             await _service.DeleteAsync(id);
@@ -30,6 +32,7 @@ namespace Api.Controllers
         }
         [HttpPut]
         [Route("UpdateHall/{id}")]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] HallEditDto hall)
         {
 
@@ -48,7 +51,6 @@ namespace Api.Controllers
 
         [HttpGet]
         [Route("GetAllHalls")]
-        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> GetAll()
         {
             var result = await _service.GetAllAsync();
