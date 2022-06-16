@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ServiceLayer.DTOs.Hall;
 using ServiceLayer.Services.Interfaces;
 using System.Threading.Tasks;
@@ -47,6 +48,7 @@ namespace Api.Controllers
 
         [HttpGet]
         [Route("GetAllHalls")]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> GetAll()
         {
             var result = await _service.GetAllAsync();
